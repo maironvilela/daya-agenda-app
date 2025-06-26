@@ -1,0 +1,53 @@
+{
+  "frames": [
+    {
+      "url": "https://www.invertexto.com/emojis-para-copiar",
+      "displayName": "Icones",
+      "icon": "crown",
+      "hideOnMobile": true,
+      "addRibbonIcon": true,
+      "openInCenter": true,
+      "zoomLevel": 1,
+      "forceIframe": false,
+      "customCss": "",
+      "customJs": ""
+    },
+    {
+      "url": "https://chat.deepseek.com/a/chat/s/6cdbc19e-099c-4fbd-968a-354796bb7e41",
+      "displayName": "DeepSeek",
+      "icon": "bot",
+      "hideOnMobile": true,
+      "addRibbonIcon": true,
+      "openInCenter": true,
+      "zoomLevel": 1,
+      "forceIframe": false,
+      "customCss": "",
+      "customJs": ""
+    },
+    {
+      "url": "https://app.diagrams.net/?src=about",
+      "displayName": "Drawio",
+      "icon": "pencil-ruler",
+      "hideOnMobile": true,
+      "addRibbonIcon": true,
+      "openInCenter": false,
+      "zoomLevel": 1,
+      "forceIframe": false,
+      "customCss": "",
+      "customJs": ""
+    },
+    {
+      "url": "https://www.notion.so/",
+      "displayName": "Notion",
+      "icon": "box",
+      "hideOnMobile": true,
+      "addRibbonIcon": true,
+      "openInCenter": true,
+      "zoomLevel": 1,
+      "forceIframe": false,
+      "customCss": "",
+      "customJs": ""
+    }
+  ],
+  "padding": 5
+}

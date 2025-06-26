@@ -1,0 +1,261 @@
+{
+  "main": {
+    "id": "29bff7a412aa2d73",
+    "type": "split",
+    "children": [
+      {
+        "id": "fe42fce4160f4e95",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b6db5086aad6844f",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "empty",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Nova aba"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "edb515cd79a2f70e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c18dc92f048eeccf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0ebddecccac490c4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "0a1a8aa4da1f990b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#Integração",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "523380a95029ed84",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 415.5
+  },
+  "right": {
+    "id": "c438d0635f34ab34",
+    "type": "split",
+    "children": [
+      {
+        "id": "c9e51b60f9419024",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a3d1b91ac480f85d",
+            "type": "leaf",
+            "state": {
+              "type": "custom-frames-deepseek",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
+            }
+          },
+          {
+            "id": "7d629c24e30fe815",
+            "type": "leaf",
+            "state": {
+              "type": "custom-frames-drawio",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
+            }
+          },
+          {
+            "id": "c64e2a2f06d3e383",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "d50dd82da4f9c69f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": false
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "bb77be2503fa809e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6ef4cbb6c7f4f630",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          },
+          {
+            "id": "de421c3e093dd4cf",
+            "type": "leaf",
+            "state": {
+              "type": "timer-view",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 2048,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "obsidian-custom-frames:Open Icones": false,
+      "obsidian-custom-frames:Open DeepSeek": false,
+      "obsidian-custom-frames:Open Drawio": false,
+      "obsidian-custom-frames:Open Notion": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "mermaid-tools:Open Mermaid Toolbar": false,
+      "obsidian-full-calendar:Open Full Calendar": false,
+      "obsidian-kanban:Criar um novo quadro": false,
+      "pomodoro-timer:Toggle timer panel": false,
+      "obsidian-statusbar-pomo:Start pomodoro": false
+    }
+  },
+  "active": "0ebddecccac490c4",
+  "lastOpenFiles": [
+    "inspirações/lista/lista-cirurgias.html",
+    "inspirações/dashboard.md",
+    "inspirações/lista",
+    "inspirações/dashboard",
+    "inspirações",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/1. Resumo.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/8. UX alinhada com o objetivo do negócio.md",
+    "Pós Graduação Engenharia de Software/04 - Design de Experiência do usuário (UX).md",
+    "_Notas Literárias/KPIs.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/8. 1.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/7. Design UX em equipes multidisciplinares.md",
+    "Pasted image 20250625213140.png",
+    "Pasted image 20250625210834.png",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/6. Metodologias de Gestão.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/5. Cinco passos essenciais da liderança na gestão da sua equipe.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/4. Pontos centrais da Liderança.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/UX e Novas Tecnologias_ Aplicações e Liderança.wav",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/3. Perguntas Frequentes.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX/2. Guia de Estudos.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/8. PodCast - Tendências futuras de design de UX aplicado à Inteligência Artificial,.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/8.2 . Principais fases do Design thinking.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/8.1 O que é Design Thinking.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3.2. Principais elementos presente em um teste de usabilidade.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/2. Os principais fundamentos de Design UX.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/9.2. Técnicas de testes de usuários e suas principais caracterísisticas.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/9.1. Testes de usuário e técnicas de iteração.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/9. Como usar imagens adaptativas com `srcset` e `sizes` 1.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/9.3. Técnicas de iteração com suas principais características.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/7. Teoria em prática.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/6. Inteligência artificial, design UX e suas implicações.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/1. Resumo.md",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/5. UX em Dispositivos IoT (Internet das Coisas).md",
+    "Pasted image 20250623225146.png",
+    "Pasted image 20250623225112.png",
+    "Pasted image 20250623225021.png",
+    "Pasted image 20250623224933.png",
+    "Pasted image 20250623224913.png",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/3. UX e as Novas Tecnologias/Sem título",
+    "Pós Graduação Engenharia de Software/docs/04 -   Design de Experiência do usuário (UX)/4. Liderança em projeto UX",
+    "_Imagens/Pasted image 20250525155613.png",
+    "_Imagens/Pasted image 20250622104641.png",
+    "_Imagens/Pasted image 20250621075816.png",
+    " 1",
+    "Pós Graduação Engenharia de Software/docs/05 - Evolução dos softwares - aplicação da Engenharia de Software em sistemas emergentes/4 - Desenvolvimento e gestão de projetos com DevOps",
+    "Pós Graduação Engenharia de Software/docs/05 - Evolução dos softwares - aplicação da Engenharia de Software em sistemas emergentes/3 - Engenharia de Software no desenvolvimento de softwares de games",
+    "Pós Graduação Engenharia de Software/docs/05 - Evolução dos softwares - aplicação da Engenharia de Software em sistemas emergentes/2 - Engenharia de Software em aplicativos para dispositivos móveis e aplicações WEB (WebApps)",
+    "Cursos/8. OCI - Oracle Cloud Infrastructure./Conteudo/3. Arquitetura da OCI/Sem título.canvas",
+    "Cursos/4. Procedures SQL - Executando código no MySQL/Sem título.canvas",
+    "Sem título.canvas",
+    "Projetos/Agendamento Consulta/Requisitos/Gerenciar Cirurgia/Sem título.canvas",
+    "Pós Graduação Engenharia de Software/docs/2 - Metodologia Desenvolvimento de Software/Sem título.canvas"
+  ]
+}

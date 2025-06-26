@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Usuários</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Custom scrollbar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      /* Animation for modal */
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-animation {
+        animation: modalFadeIn 0.3s ease-out;
+      }
+
+      /* Custom checkbox */
+      .custom-checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #d1d5db;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .custom-checkbox:checked {
+        background-color: #3b82f6;
+        border-color: #3b82f6;
+      }
+
+      .custom-checkbox:checked::after {
+        content: '\2713';
+        position: absolute;
+        color: white;
+        font-size: 14px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <div class="hidden md:flex md:flex-shrink-0">
+        <div class="flex flex-col w-64 bg-indigo-700 text-white">
+          <div class="flex items-center justify-center h-16 px-4 bg-indigo-800">
+            <h1 class="text-xl font-bold">
+              Admin<span class="text-indigo-300">Sys</span>
+            </h1>
+          </div>
+          <div
+            class="flex flex-col flex-grow px-4 py-4 overflow-y-auto custom-scrollbar"
+          >
+            <nav class="flex-1 space-y-2">
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-800 rounded-lg"
+              >
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 text-sm font-medium text-indigo-200 hover:text-white hover:bg-indigo-600 rounded-lg"
+              >
+                <i class="fas fa-users mr-3"></i>
+                Usuários
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 text-sm font-medium text-indigo-200 hover:text-white hover:bg-indigo-600 rounded-lg"
+              >
+                <i class="fas fa-cog mr-3"></i>
+                Configurações
+              </a>
+              <a
+                href="#"
+                class="flex items-center px-4 py-2 text-sm font-medium text-indigo-200 hover:text-white hover:bg-indigo-600 rounded-lg"
+              >
+                <i class="fas fa-chart-bar mr-3"></i>
+                Relatórios
+              </a>
+            </nav>
+          </div>
+          <div class="px-4 py-4 border-t border-indigo-600">
+            <div class="flex items-center">
+              <img
+                class="w-10 h-10 rounded-full"
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                alt="User"
+              />
+              <div class="ml-3">
+                <p class="text-sm font-medium">Admin User</p>
+                <p class="text-xs text-indigo-200">admin@example.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="flex flex-col flex-1 overflow-hidden">
+        <!-- Top navbar -->
+        <header class="bg-white shadow-sm">
+          <div class="flex items-center justify-between px-6 py-3">
+            <div class="flex items-center">
+              <button class="md:hidden text-gray-500 focus:outline-none mr-4">
+                <i class="fas fa-bars text-xl"></i>
+              </button>
+              <h2 class="text-xl font-semibold text-gray-800">
+                Gerenciamento de Usuários
+              </h2>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button
+                class="text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <i class="fas fa-bell text-xl"></i>
+              </button>
+              <button
+                class="text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <i class="fas fa-envelope text-xl"></i>
+              </button>
+              <div class="relative">
+                <button
+                  id="user-menu-button"
+                  class="flex items-center space-x-2 focus:outline-none"
+                >
+                  <span class="text-sm font-medium">Admin</span>
+                  <img
+                    class="w-8 h-8 rounded-full"
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt="User"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main content area -->
+        <main class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <!-- Stats and actions -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">Total de Usuários</p>
+                  <p class="text-2xl font-bold">1,248</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                  <i class="fas fa-users text-blue-600 text-xl"></i>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">Ativos Hoje</p>
+                  <p class="text-2xl font-bold">342</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                  <i class="fas fa-user-check text-green-600 text-xl"></i>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">Novos (7 dias)</p>
+                  <p class="text-2xl font-bold">87</p>
+                </div>
+                <div class="bg-purple-100 p-3 rounded-full">
+                  <i class="fas fa-user-plus text-purple-600 text-xl"></i>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-500 text-sm">Inativos</p>
+                  <p class="text-2xl font-bold">56</p>
+                </div>
+                <div class="bg-yellow-100 p-3 rounded-full">
+                  <i class="fas fa-user-clock text-yellow-600 text-xl"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User management section -->
+          <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div class="p-6 border-b border-gray-200">
+              <div
+                class="flex flex-col md:flex-row md:items-center md:justify-between"
+              >
+                <div class="mb-4 md:mb-0">
+                  <h3 class="text-lg font-medium text-gray-900">
+                    Lista de Usuários
+                  </h3>
+                  <p class="text-sm text-gray-500">
+                    Gerencie todos os usuários do sistema
+                  </p>
+                </div>
+                <div
+                  class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3"
+                >
+                  <div class="relative">
+                    <input
+                      type="text"
+                      placeholder="Buscar usuários..."
+                      class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
+                    />
+                    <i
+                      class="fas fa-search absolute left-3 top-3 text-gray-400"
+                    ></i>
+                  </div>
+                  <button
+                    id="add-user-btn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center justify-center transition duration-150 ease-in-out"
+                  >
+                    <i class="fas fa-plus mr-2"></i>
+                    Adicionar Usuário
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+              <div
+                class="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0"
+              >
+                <div class="flex items-center space-x-4">
+                  <div class="relative">
+                    <select
+                      class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                    >
+                      <option>Todos os status</option>
+                      <option>Ativo</option>
+                      <option>Inativo</option>
+                      <option>Suspenso</option>
+                    </select>
+                    <i
+                      class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"
+                    ></i>
+                  </div>
+                  <div class="relative">
+                    <select
+                      class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                    >
+                      <option>Todos os perfis</option>
+                      <option>Administrador</option>
+                      <option>Usuário</option>
+                      <option>Moderador</option>
+                    </select>
+                    <i
+                      class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"
+                    ></i>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+                  >
+                    <i class="fas fa-filter mr-1"></i>
+                    Filtrar
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+                  >
+                    <i class="fas fa-redo mr-1"></i>
+                    Resetar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Users table -->
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      <input type="checkbox" class="custom-checkbox" />
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Nome
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Email
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Perfil
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Último Acesso
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Ações
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="bg-white divide-y divide-gray-200"
+                  id="users-table-body"
+                >
+                  <!-- Users will be loaded here by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+              <div
+                class="flex flex-col md:flex-row items-center justify-between"
+              >
+                <div class="mb-4 md:mb-0">
+                  <p class="text-sm text-gray-700">
+                    Mostrando <span class="font-medium">1</span> a
+                    <span class="font-medium">10</span> de
+                    <span class="font-medium">1248</span> resultados
+                  </p>
+                </div>
+                <div class="flex space-x-2">
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50"
+                    disabled
+                  >
+                    Anterior
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+                  >
+                    1
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+                  >
+                    2
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+                  >
+                    3
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+                  >
+                    Próximo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-animation"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <i class="fas fa-user-plus text-blue-600"></i>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Adicionar Novo Usuário
+                </h3>
+                <div class="mt-2">
+                  <form id="add-user-form">
+                    <div
+                      class="grid grid-cols-1 gap-y-4 gap-x-6 sm:grid-cols-6"
+                    >
+                      <div class="sm:col-span-3">
+                        <label
+                          for="first-name"
+                          class="block text-sm font-medium text-gray-700"
+                          >Nome</label
+                        >
+                        <input
+                          type="text"
+                          name="first-name"
+                          id="first-name"
+                          autocomplete="given-name"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-3">
+                        <label
+                          for="last-name"
+                          class="block text-sm font-medium text-gray-700"
+                          >Sobrenome</label
+                        >
+                        <input
+                          type="text"
+                          name="last-name"
+                          id="last-name"
+                          autocomplete="family-name"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="email"
+                          class="block text-sm font-medium text-gray-700"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          autocomplete="email"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="role"
+                          class="block text-sm font-medium text-gray-700"
+                          >Perfil</label
+                        >
+                        <select
+                          id="role"
+                          name="role"
+                          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                          <option>Selecione um perfil</option>
+                          <option>Administrador</option>
+                          <option>Usuário</option>
+                          <option>Moderador</option>
+                        </select>
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="status"
+                          class="block text-sm font-medium text-gray-700"
+                          >Status</label
+                        >
+                        <select
+                          id="status"
+                          name="status"
+                          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                          <option>Ativo</option>
+                          <option>Inativo</option>
+                          <option>Suspenso</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              id="confirm-add-user"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Adicionar
+            </button>
+            <button
+              type="button"
+              id="cancel-add-user"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="edit-user-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-animation"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <i class="fas fa-user-edit text-blue-600"></i>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Editar Usuário
+                </h3>
+                <div class="mt-2">
+                  <form id="edit-user-form">
+                    <input type="hidden" id="edit-user-id" />
+                    <div
+                      class="grid grid-cols-1 gap-y-4 gap-x-6 sm:grid-cols-6"
+                    >
+                      <div class="sm:col-span-3">
+                        <label
+                          for="edit-first-name"
+                          class="block text-sm font-medium text-gray-700"
+                          >Nome</label
+                        >
+                        <input
+                          type="text"
+                          name="edit-first-name"
+                          id="edit-first-name"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-3">
+                        <label
+                          for="edit-last-name"
+                          class="block text-sm font-medium text-gray-700"
+                          >Sobrenome</label
+                        >
+                        <input
+                          type="text"
+                          name="edit-last-name"
+                          id="edit-last-name"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="edit-email"
+                          class="block text-sm font-medium text-gray-700"
+                          >Email</label
+                        >
+                        <input
+                          type="email"
+                          name="edit-email"
+                          id="edit-email"
+                          class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 border"
+                        />
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="edit-role"
+                          class="block text-sm font-medium text-gray-700"
+                          >Perfil</label
+                        >
+                        <select
+                          id="edit-role"
+                          name="edit-role"
+                          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                          <option>Administrador</option>
+                          <option>Usuário</option>
+                          <option>Moderador</option>
+                        </select>
+                      </div>
+                      <div class="sm:col-span-6">
+                        <label
+                          for="edit-status"
+                          class="block text-sm font-medium text-gray-700"
+                          >Status</label
+                        >
+                        <select
+                          id="edit-status"
+                          name="edit-status"
+                          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        >
+                          <option>Ativo</option>
+                          <option>Inativo</option>
+                          <option>Suspenso</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              id="confirm-edit-user"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Salvar Alterações
+            </button>
+            <button
+              type="button"
+              id="cancel-edit-user"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div
+      id="delete-user-modal"
+      class="fixed inset-0 z-50 hidden overflow-y-auto"
+    >
+      <div
+        class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-animation"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <i class="fas fa-exclamation-triangle text-red-600"></i>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Confirmar Exclusão
+                </h3>
+                <div class="mt-2">
+                  <p class="text-sm text-gray-500">
+                    Tem certeza que deseja excluir este usuário? Esta ação não
+                    pode ser desfeita.
+                  </p>
+                  <input type="hidden" id="delete-user-id" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              id="confirm-delete-user"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Excluir
+            </button>
+            <button
+              type="button"
+              id="cancel-delete-user"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="success-notification" class="fixed bottom-4 right-4 hidden">
+      <div
+        class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center"
+      >
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="success-message">Operação realizada com sucesso!</span>
+      </div>
+    </div>
+
+    <!-- Error Notification -->
+    <div id="error-notification" class="fixed bottom-4 right-4 hidden">
+      <div
+        class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <span id="error-message">Ocorreu um erro!</span>
+      </div>
+    </div>
+
+    <script>
+      // Sample user data
+      const users = [
+        {
+          id: 1,
+          firstName: 'João',
+          lastName: 'Silva',
+          email: 'joao.silva@example.com',
+          role: 'Administrador',
+          status: 'Ativo',
+          lastAccess: '2023-05-15 14:30',
+          avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        },
+        {
+          id: 2,
+          firstName: 'Maria',
+          lastName: 'Santos',
+          email: 'maria.santos@example.com',
+          role: 'Usuário',
+          status: 'Ativo',
+          lastAccess: '2023-05-14 09:15',
+          avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
+        },
+        {
+          id: 3,
+          firstName: 'Carlos',
+          lastName: 'Oliveira',
+          email: 'carlos.oliveira@example.com',
+          role: 'Moderador',
+          status: 'Inativo',
+          lastAccess: '2023-05-10 16:45',
+          avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
+        },
+        {
+          id: 4,
+          firstName: 'Ana',
+          lastName: 'Costa',
+          email: 'ana.costa@example.com',
+          role: 'Usuário',
+          status: 'Suspenso',
+          lastAccess: '2023-05-05 11:20',
+          avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
+        },
+        {
+          id: 5,
+          firstName: 'Pedro',
+          lastName: 'Almeida',
+          email: 'pedro.almeida@example.com',
+          role: 'Usuário',
+          status: 'Ativo',
+          lastAccess: '2023-05-15 10:30',
+          avatar: 'https://randomuser.me/api/portraits/men/5.jpg',
+        },
+        {
+          id: 6,
+          firstName: 'Juliana',
+          lastName: 'Pereira',
+          email: 'juliana.pereira@example.com',
+          role: 'Moderador',
+          status: 'Ativo',
+          lastAccess: '2023-05-13 15:10',
+          avatar: 'https://randomuser.me/api/portraits/women/6.jpg',
+        },
+        {
+          id: 7,
+          firstName: 'Lucas',
+          lastName: 'Rodrigues',
+          email: 'lucas.rodrigues@example.com',
+          role: 'Usuário',
+          status: 'Inativo',
+          lastAccess: '2023-05-08 13:25',
+          avatar: 'https://randomuser.me/api/portraits/men/7.jpg',
+        },
+        {
+          id: 8,
+          firstName: 'Fernanda',
+          lastName: 'Lima',
+          email: 'fernanda.lima@example.com',
+          role: 'Administrador',
+          status: 'Ativo',
+          lastAccess: '2023-05-15 08:45',
+          avatar: 'https://randomuser.me/api/portraits/women/8.jpg',
+        },
+        {
+          id: 9,
+          firstName: 'Rafael',
+          lastName: 'Gomes',
+          email: 'rafael.gomes@example.com',
+          role: 'Usuário',
+          status: 'Suspenso',
+          lastAccess: '2023-05-01 17:30',
+          avatar: 'https://randomuser.me/api/portraits/men/9.jpg',
+        },
+        {
+          id: 10,
+          firstName: 'Patricia',
+          lastName: 'Martins',
+          email: 'patricia.martins@example.com',
+          role: 'Moderador',
+          status: 'Ativo',
+          lastAccess: '2023-05-14 14:15',
+          avatar: 'https://randomuser.me/api/portraits/women/10.jpg',
+        },
+      ];
+
+      // DOM elements
+      const usersTableBody = document.getElementById('users-table-body');
+      const addUserBtn = document.getElementById('add-user-btn');
+      const addUserModal = document.getElementById('add-user-modal');
+      const cancelAddUser = document.getElementById('cancel-add-user');
+      const confirmAddUser = document.getElementById('confirm-add-user');
+      const addUserForm = document.getElementById('add-user-form');
+
+      const editUserModal = document.getElementById('edit-user-modal');
+      const cancelEditUser = document.getElementById('cancel-edit-user');
+      const confirmEditUser = document.getElementById('confirm-edit-user');
+      const editUserForm = document.getElementById('edit-user-form');
+
+      const deleteUserModal = document.getElementById('delete-user-modal');
+      const cancelDeleteUser = document.getElementById('cancel-delete-user');
+      const confirmDeleteUser = document.getElementById('confirm-delete-user');
+
+      const successNotification = document.getElementById(
+        'success-notification'
+      );
+      const errorNotification = document.getElementById('error-notification');
+
+      // Current user being edited/deleted
+      let currentUserId = null;
+
+      // Render users table
+      function renderUsers() {
+        usersTableBody.innerHTML = '';
+
+        users.forEach((user) => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-gray-50';
+
+          // Status badge color
+          let statusClass = '';
+          if (user.status === 'Ativo') {
+            statusClass = 'bg-green-100 text-green-800';
+          } else if (user.status === 'Inativo') {
+            statusClass = 'bg-yellow-100 text-yellow-800';
+          } else {
+            statusClass = 'bg-red-100 text-red-800';
+          }
+
+          row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <input type="checkbox" class="custom-checkbox">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <img class="h-10 w-10 rounded-full" src="${user.avatar}" alt="${user.firstName} ${user.lastName}">
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">${user.firstName} ${user.lastName}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">${user.email}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">${user.role}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                            ${user.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${user.lastAccess}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button class="text-blue-600 hover:text-blue-900 mr-3 edit-user" data-id="${user.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="text-red-600 hover:text-red-900 delete-user" data-id="${user.id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                `;
+
+          usersTableBody.appendChild(row);
+        });
+
+        // Add event listeners to edit and delete buttons
+        document.querySelectorAll('.edit-user').forEach((btn) => {
+          btn.addEventListener('click', () =>
+            openEditModal(parseInt(btn.dataset.id))
+          );
+        });
+
+        document.querySelectorAll('.delete-user').forEach((btn) => {
+          btn.addEventListener('click', () =>
+            openDeleteModal(parseInt(btn.dataset.id))
+          );
+        });
+      }
+
+      // Open add user modal
+      addUserBtn.addEventListener('click', () => {
+        addUserModal.classList.remove('hidden');
+      });
+
+      // Close add user modal
+      cancelAddUser.addEventListener('click', () => {
+        addUserModal.classList.add('hidden');
+        addUserForm.reset();
+      });
+
+      // Confirm add user
+      confirmAddUser.addEventListener('click', () => {
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const role = document.getElementById('role').value;
+        const status = document.getElementById('status').value;
+
+        if (
+          !firstName ||
+          !lastName ||
+          !email ||
+          role === 'Selecione um perfil'
+        ) {
+          showNotification(
+            'error',
+            'Por favor, preencha todos os campos obrigatórios.'
+          );
+          return;
+        }
+
+        // Generate a new ID
+        const newId =
+          users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1;
+
+        // Add new user
+        users.unshift({
+          id: newId,
+          firstName,
+          lastName,
+          email,
+          role,
+          status,
+          lastAccess:
+            new Date().toISOString().split('T')[0] +
+            ' ' +
+            new Date().toLocaleTimeString().slice(0, 5),
+          avatar: `https://randomuser.me/api/portraits/${
+            Math.random() > 0.5 ? 'men' : 'women'
+          }/${Math.floor(Math.random() * 100)}.jpg`,
+        });
+
+        // Update UI
+        renderUsers();
+        addUserModal.classList.add('hidden');
+        addUserForm.reset();
+
+        showNotification('success', 'Usuário adicionado com sucesso!');
+      });
+
+      // Open edit modal
+      function openEditModal(userId) {
+        const user = users.find((u) => u.id === userId);
+        if (!user) return;
+
+        currentUserId = userId;
+
+        document.getElementById('edit-user-id').value = user.id;
+        document.getElementById('edit-first-name').value = user.firstName;
+        document.getElementById('edit-last-name').value = user.lastName;
+        document.getElementById('edit-email').value = user.email;
+        document.getElementById('edit-role').value = user.role;
+        document.getElementById('edit-status').value = user.status;
+
+        editUserModal.classList.remove('hidden');
+      }
+
+      // Close edit modal
+      cancelEditUser.addEventListener('click', () => {
+        editUserModal.classList.add('hidden');
+        currentUserId = null;
+      });
+
+      // Confirm edit user
+      confirmEditUser.addEventListener('click', () => {
+        const user = users.find((u) => u.id === currentUserId);
+        if (!user) return;
+
+        user.firstName = document.getElementById('edit-first-name').value;
+        user.lastName = document.getElementById('edit-last-name').value;
+        user.email = document.getElementById('edit-email').value;
+        user.role = document.getElementById('edit-role').value;
+        user.status = document.getElementById('edit-status').value;
+
+        // Update UI
+        renderUsers();
+        editUserModal.classList.add('hidden');
+        currentUserId = null;
+
+        showNotification('success', 'Usuário atualizado com sucesso!');
+      });
+
+      // Open delete modal
+      function openDeleteModal(userId) {
+        currentUserId = userId;
+        deleteUserModal.classList.remove('hidden');
+      }
+
+      // Close delete modal
+      cancelDeleteUser.addEventListener('click', () => {
+        deleteUserModal.classList.add('hidden');
+        currentUserId = null;
+      });
+
+      // Confirm delete user
+      confirmDeleteUser.addEventListener('click', () => {
+        const userIndex = users.findIndex((u) => u.id === currentUserId);
+        if (userIndex === -1) return;
+
+        users.splice(userIndex, 1);
+
+        // Update UI
+        renderUsers();
+        deleteUserModal.classList.add('hidden');
+        currentUserId = null;
+
+        showNotification('success', 'Usuário excluído com sucesso!');
+      });
+
+      // Show notification
+      function showNotification(type, message) {
+        if (type === 'success') {
+          document.getElementById('success-message').textContent = message;
+          successNotification.classList.remove('hidden');
+
+          setTimeout(() => {
+            successNotification.classList.add('hidden');
+          }, 3000);
+        } else {
+          document.getElementById('error-message').textContent = message;
+          errorNotification.classList.remove('hidden');
+
+          setTimeout(() => {
+            errorNotification.classList.add('hidden');
+          }, 3000);
+        }
+      }
+
+      // Initialize the page
+      document.addEventListener('DOMContentLoaded', () => {
+        renderUsers();
+
+        // Close modals when clicking outside
+        [addUserModal, editUserModal, deleteUserModal].forEach((modal) => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.classList.add('hidden');
+              if (modal === editUserModal || modal === deleteUserModal) {
+                currentUserId = null;
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
