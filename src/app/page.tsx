@@ -12,14 +12,13 @@ import checkDouble from '@/icons/check-double.svg';
 
 import Image from 'next/image';
 import { Status } from '@/components/status';
+import { Header } from '@/components/header';
 
 // ...existing code...
 export default function Home() {
   return (
     <div className="bg-gray-100 h-screen overflow-auto gap-2 w-screen">
-      <header className="text-2xl font-semibold text-gray-800 bg-white p-4 shadow-[0_4px_6px_-1px_rgba(59,150,246,0.3)]">
-        Dashboard
-      </header>
+      <Header title="Dashboard" />
 
       <main className="p-4">
         <header className="flex flex-row justify-around items-start flex-wrap  py-4 gap-4 ">

@@ -26,6 +26,7 @@
     "Tipo de Nota": "multitext",
     "Quiz": "checkbox",
     "Prioridade": "multitext",
-    "RF": "multitext"
+    "RF": "multitext",
+    "Projeto": "multitext"
   }
 }
