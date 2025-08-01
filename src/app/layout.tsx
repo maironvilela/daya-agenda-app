@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Theme } from "@radix-ui/themes";
+import { Header } from "@/app/layout/header";
+import { Sidebar } from "@/app/layout/sidebar";
+import { ParticleEffect } from "./dashboard/components/particle-effect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +27,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt" className="dark ">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen `}
       >
-        {children}
+        <Theme>
+          <div className="flex flex-col gap-2 py-4 container mx-auto">
+            <Header />
+            <div className="flex flex-row gap-2">
+              <Sidebar />
+              {children}
+            </div>
+          </div>
+        </Theme>
       </body>
     </html>
   );
