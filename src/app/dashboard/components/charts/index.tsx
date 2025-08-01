@@ -49,7 +49,10 @@ export function Chart({ title, className }: ChartProps) {
   return (
     <div className={`${className}`}>
       <h3>{title}</h3>
-      <ChartContainer config={chartConfig} className={` ${className} h-40`}>
+      <ChartContainer
+        config={chartConfig}
+        className={` ${className} h-40 w-full`}
+      >
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis

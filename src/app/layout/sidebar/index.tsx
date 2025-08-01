@@ -1,6 +1,8 @@
 import { Card } from "@radix-ui/themes";
 import { CardContent } from "../../../components/ui/card";
 import { NavItem } from "./nav-item";
+import { cn } from "@/lib/utils";
+
 import {
   Activity,
   Command,
@@ -13,11 +15,11 @@ import {
   Terminal,
 } from "lucide-react";
 
-export function Sidebar() {
+export const Sidebar = ({ className }: { className?: string }) => {
   return (
-    <div>
-      <div className="bg-slate-900/50 border-slate-700/50 border-2 h-168 rounded-lg w-12 overflow-hidden     ">
-        <nav>
+    <div className={className}>
+      <div className="bg-slate-900/50 border-slate-700/50 border-2 h-168 rounded-lg w-50  overflow-hidden      hover:bg-red-950">
+        <nav className={className}>
           <NavItem icon={Command} label="Dashboard" active />
           <NavItem icon={Activity} label="Diagnostics" />
           <NavItem icon={Database} label="Data Center" />
@@ -39,4 +41,4 @@ export function Sidebar() {
       </div>
     </div>
   );
-}
+};

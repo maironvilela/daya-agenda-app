@@ -18,7 +18,7 @@ export function ItemOfSurgeries({
 
   return (
     <div
-      className={`px-2  hover:bg-gray-50 transition-colors duration-150 border-l-6 ${borderColor} mb-4`}
+      className={`p-2  hover:bg-gray-900 transition-colors duration-150 border-l-6 ${borderColor} mb-4`}
     >
       <div className="flex justify-between items-start ml-2">
         <div className="flex items-start space-x-4">

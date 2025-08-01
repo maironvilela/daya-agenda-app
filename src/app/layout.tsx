@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen `}
       >
         <Theme>
-          <div className="flex flex-col gap-2 py-4 container mx-auto">
+          <div className="flex flex-col gap-2 py-4 container mx-auto ">
             <Header />
             <div className="flex flex-row gap-2">
               <Sidebar />

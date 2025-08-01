@@ -11,16 +11,16 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 8px;
-  background: #1e293b; /* cor do track */
+  height: 8px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #ef4444; /* cor do thumb */
-  border-radius: 8px;
+*::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 10px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #dc2626;
+*::-webkit-scrollbar-track {
+  background-color: #fff;
 }

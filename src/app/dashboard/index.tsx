@@ -8,6 +8,11 @@ import { useEffect, useState } from "react";
 import { Chart } from "./components/charts";
 import { CirurgiasAgendadas } from "./components/cirurgias-agendadas";
 import { Activity } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,8 +38,16 @@ export function Dashboard() {
             <div className="overflow-y-auto">
               <DashboardInfo />
               <div className="bg-slate-900/50 border-slate-700/50 border-2   rounded-lg p-4   col-span-2 backdrop-blur-sm flex flex-row gap-2 ">
-                <Chart title="Cirurgias Realizadas" />
-                <Chart title="Cirurgias Canceladas" />
+                <Carousel>
+                  <CarouselContent>
+                    <CarouselItem className="basis-1/1">
+                      <Chart title="Cirurgias Realizadas" />
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/1">
+                      <Chart title="Cirurgias Canceladas" />
+                    </CarouselItem>
+                  </CarouselContent>
+                </Carousel>
               </div>
               <CirurgiasAgendadas />
             </div>
