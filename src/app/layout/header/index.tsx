@@ -1,11 +1,11 @@
-import { Bell, Mail } from "lucide-react";
-import Image from "next/image";
-import { Avatar } from "../../../components/Avatar";
+import { Bell, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { Avatar } from '../../../components/Avatar';
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between border-b border-slate-700/50  container mx-auto">
-      <div className="flex items-center space-x-2">
+    <header className="flex items-center justify-between border-b pr-4 border-slate-700/50">
+      <div className="flex items-center space-x-2 ">
         <Image
           alt="Logo"
           src="/logo.svg"

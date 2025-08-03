@@ -1,23 +1,23 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Filter } from "lucide-react"
+} from '@/components/ui/popover';
+import { Filter } from 'lucide-react';
 
-export function FilterModal() {
+export function SchedulingFilter() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline"><Filter/></Button>
+        <Button variant="outline" className="z-50">
+          <Filter />
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">
-        <div className="grid gap-4">
+        <div className="grid gap-4 bg-slate-900 border-slate-700/50 border-2  text-gray-50 p-8 rounded-2xl">
           <div className="space-y-2">
             <h4 className="leading-none font-medium">Dimensions</h4>
             <p className="text-muted-foreground text-sm">
@@ -61,5 +61,5 @@ export function FilterModal() {
         </div>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

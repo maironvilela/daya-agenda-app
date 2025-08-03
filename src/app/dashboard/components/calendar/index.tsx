@@ -1,37 +1,34 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { parseDate } from "chrono-node";
-import { Calendar1, CalendarIcon, Filter } from "lucide-react";
+import * as React from 'react';
+import { parseDate } from 'chrono-node';
+import { Calendar1, CalendarIcon, Filter } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Calendar as CalendarUI } from "@/components/ui/calendar";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Calendar as CalendarUI } from '@/components/ui/calendar';
+import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { FilterModal } from "../filter-modal";
-
-
+} from '@/components/ui/popover';
+import { SchedulingFilter } from '../scheduling-filter';
 
 function formatDate(date: Date | undefined) {
   if (!date) {
-    return "";
+    return '';
   }
 
-  return date.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
+  return date.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   });
 }
 
 export function Calendar() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("In 2 days");
+  const [value, setValue] = React.useState('In 2 days');
   const [date, setDate] = React.useState<Date | undefined>(
     parseDate(value) || undefined
   );
@@ -39,14 +36,13 @@ export function Calendar() {
 
   return (
     <div className="flex flex-col gap-4">
-       <div className="flex flex-row  gap-2 px-2 items-center justify-between ">
+      <div className="flex flex-row  gap-2 px-2 items-center justify-between ">
         <div className="flex flex-row gap-2">
-          <Calendar1/>
+          <Calendar1 />
           <span> Agendamentos </span>
         </div>
-        <FilterModal/>      
-     
-       </div>
+        <SchedulingFilter />
+      </div>
       <div className="relative flex gap-2">
         <Input
           id="date"
@@ -62,7 +58,7 @@ export function Calendar() {
             }
           }}
           onKeyDown={(e) => {
-            if (e.key === "ArrowDown") {
+            if (e.key === 'ArrowDown') {
               e.preventDefault();
               setOpen(true);
             }
