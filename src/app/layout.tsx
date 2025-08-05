@@ -34,7 +34,7 @@ export default function RootLayout({
         <Theme>
           <Header />
           <div className="flex flex-row w-screen gap-4 p-4 overflow-hidden container mx-auto relative">
-            <Sidebar className="z-50  w-20 hover:w-80 transition-all duration-1000 overflow-x-hidden bg-slate-900/50 border-slate-700/50 border-2 h-120  " />
+            <Sidebar className="z-50  w-14 hover:w-52 transition-all duration-1000 overflow-x-hidden bg-slate-900/50  rounded-l border-slate-700/50 border-2 h-120  " />
             {children}
           </div>
         </Theme>

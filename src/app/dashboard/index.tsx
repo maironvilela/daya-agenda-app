@@ -1,4 +1,4 @@
-import { Loading } from '@/app/dashboard/components/loading';
+import { Loading } from '@/app/components/loading';
 
 import { DashboardInfo } from '@/app/dashboard/components/dashboard-info';
 import { Agenda } from '@/app/dashboard/components/agenda';
@@ -27,7 +27,7 @@ export function Dashboard() {
 
   return (
     <div>
-      {isLoading && <Loading />}
+      {isLoading && <Loading message="Carregando Dashboard" />}
       <main className="grid grid-cols-12 gap-2  ">
         <section className="col-span-8 space-y-2">
           <div className="bg-slate-900/50 border-slate-700/50 border-2 rounded-lg  flex flex-row h-12 items-center gap-2 p-2">

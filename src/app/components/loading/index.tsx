@@ -1,4 +1,8 @@
-export function Loading() {
+type LoadingProps = {
+  message?: string;
+};
+
+export function Loading({ message = 'Carregando' }: LoadingProps) {
   return (
     <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50">
       <div className="flex flex-col items-center">
@@ -10,7 +14,7 @@ export function Loading() {
           <div className="absolute inset-8 border-4 border-l-green-500 border-t-transparent border-r-transparent border-b-transparent rounded-full animate-spin"></div>
         </div>
         <div className="mt-4 text-cyan-500 font-mono text-sm tracking-wider">
-          Carregando ....
+          {message}
         </div>
       </div>
     </div>
